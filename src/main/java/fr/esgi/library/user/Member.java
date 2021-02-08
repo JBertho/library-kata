@@ -24,7 +24,8 @@ public class Member extends Guest {
     private final IFileReader fileReader;
     private final ILogger logger;
 
-    public Member(String userName, IFileReader fileReader, IFileWriter fileWriter, ILogger logger) {
+    public Member(String userName,Library library, IFileReader fileReader, IFileWriter fileWriter, ILogger logger) {
+        super(library);
         this.userName = userName;
         userBooks = new ArrayList<>();
         this.fileWriter = fileWriter;
@@ -40,7 +41,7 @@ public class Member extends Guest {
         }
     }
 
-    public void borrowBook(Library library, Book book) {
+    public void borrowBook(Book book) {
         if (library.isBookAvailable(book) && canBorrowBooks()) {
             UserBook newUserBook = new UserBook(book, LocalDate.now());
             userBooks.add(newUserBook);

@@ -6,7 +6,14 @@ import fr.esgi.library.model.Book;
 import java.util.List;
 
 public class Guest {
-    public List<Book> getLibraryContent(Library library) {
+
+    Library library;
+
+    public Guest(Library library) {
+        this.library = library;
+    }
+
+    public List<Book> getLibraryContent() {
         return library.getLibraryContent();
     }
 }

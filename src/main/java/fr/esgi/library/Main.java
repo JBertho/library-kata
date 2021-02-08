@@ -19,19 +19,19 @@ public class Main {
 
 
         Library library = new Library(fileReader, fileWriter, logger);
-        Librarian librarian = new Librarian();
+
+        Librarian librarian = new Librarian(library);
         Book book = new Book("La croisée des mondes", "Carlos");
-//        Book book2 = new Book("1984", "Test");
-        librarian.addBookToLibrary(library, book);
+        librarian.addBookToLibrary(book);
 //        librarian.addBookToLibrary(library, book2);
-//        List<Book> books = librarian.getLibraryContent(library);
+//        List<Book> books = librarian.getLibraryContent();
 //        System.out.println(books);
 
-        Member james = new Member("james",fileReader, fileWriter, logger);
-        james.borrowBook(library,book);
+        Member james = new Member("james",library,fileReader, fileWriter, logger);
+        james.borrowBook(book);
         System.out.println(james.getBorrowedBooks());
 
-        System.out.println(james.getLibraryContent(library));
+        System.out.println(james.getLibraryContent());
 
     }
 }

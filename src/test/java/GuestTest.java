@@ -20,7 +20,6 @@ public class GuestTest {
 
     @Before
     public void setup() {
-        guest = new Guest();
         Book first = new Book("first book", "author");
         LibraryBook firstLibraryBook = new LibraryBook(first,false);
         Book second = new Book("second book", "second author");
@@ -29,6 +28,7 @@ public class GuestTest {
         stringsBooks.add(firstLibraryBook.toFileFormat());
         stringsBooks.add(secondLibraryBook.toFileFormat());
         library = new Library(filename -> stringsBooks, new LibraryTestWriter(), new DefaultLogger());
+        guest = new Guest(library);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class GuestTest {
         List<Book> expectedList = new ArrayList<>();
         expectedList.add(new Book("first book", "author"));
         expectedList.add(new Book("second book", "second author"));
-        List<Book> result = guest.getLibraryContent(library);
+        List<Book> result = guest.getLibraryContent();
         assertEquals(expectedList, result);
     }
 
@@ -47,7 +47,7 @@ public class GuestTest {
 
         library.setSelectedBookToBorrowed(new Book("second book", "second author"));
 
-        List<Book> result = guest.getLibraryContent(library);
+        List<Book> result = guest.getLibraryContent();
         assertEquals(expectedList, result);
     }
 

@@ -20,17 +20,17 @@ public class LibrarianTest {
     @Before
     public void setup() {
 
-        librarian = new Librarian();
         library = new Library(filename -> Collections.emptyList(), new LibrarianTestWriter(), new DefaultLogger());
+        librarian = new Librarian(library);
     }
 
     @Test
     public void should_add_book_to_library() {
 
-        assertEquals(0,librarian.getLibraryContent(library).size());
+        assertEquals(0,librarian.getLibraryContent().size());
         Book newBook = new Book("book of the year", "test");
-        librarian.addBookToLibrary(library,newBook);
-        assertEquals(1,librarian.getLibraryContent(library).size());
+        librarian.addBookToLibrary(newBook);
+        assertEquals(1,librarian.getLibraryContent().size());
     }
 
     private static class LibrarianTestWriter implements IFileWriter {

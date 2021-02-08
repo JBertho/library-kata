@@ -23,49 +23,50 @@ public class MemberTest {
     @Before
     public void setup() {
 
-        member = new Member("sut", filename -> Collections.emptyList(), new memberTestWriter(), new DefaultLogger());
         library = new Library(filename -> Collections.emptyList(), new memberTestWriter(), new DefaultLogger());
         library.addBook(new Book("first book", "author"));
         library.addBook(new Book("second book", "author"));
         library.addBook(new Book("third book", "author"));
         library.addBook(new Book("my book", "author"));
         library.addBook(new Book("too much book", "author"));
+
+        member = new Member("sut",library, filename -> Collections.emptyList(), new memberTestWriter(), new DefaultLogger());
     }
 
     @Test
     public void should_borrow_book_when_have_less_than_4_current_borrowed_book() {
         Book bookToBorrow = new Book("first book", "author");
         assertEquals(0,member.getBorrowedBooks().size());
-        member.borrowBook(library, bookToBorrow);
+        member.borrowBook(bookToBorrow);
         assertEquals(1,member.getBorrowedBooks().size());
     }
 
     @Test
     public void should_not_borrow_book_when_already_have_4_current_borrowed_book() {
-        member.borrowBook(library,new Book("first book", "author"));
-        member.borrowBook(library,new Book("second book", "author"));
-        member.borrowBook(library,new Book("third book", "author"));
-        member.borrowBook(library,new Book("my book", "author"));
+        member.borrowBook(new Book("first book", "author"));
+        member.borrowBook(new Book("second book", "author"));
+        member.borrowBook(new Book("third book", "author"));
+        member.borrowBook(new Book("my book", "author"));
         assertEquals(4,member.getBorrowedBooks().size());
 
-        member.borrowBook(library, new Book("too much book", "author"));
+        member.borrowBook(new Book("too much book", "author"));
         assertEquals(4,member.getBorrowedBooks().size());
     }
 
     @Test
     public void should_not_borrow_book_when_book_not_exist() {
 
-        member.borrowBook(library, new Book("i don't exist", "author"));
+        member.borrowBook(new Book("i don't exist", "author"));
         assertEquals(0,member.getBorrowedBooks().size());
     }
 
     @Test
     public void should_not_borrow_book_when_book_already_borrowed() {
 
-        member.borrowBook(library,new Book("my book", "author"));
+        member.borrowBook(new Book("my book", "author"));
         assertEquals(1,member.getBorrowedBooks().size());
 
-        member.borrowBook(library, new Book("my book", "author"));
+        member.borrowBook(new Book("my book", "author"));
         assertEquals(1,member.getBorrowedBooks().size());
     }
 
