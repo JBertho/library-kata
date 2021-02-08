@@ -18,10 +18,10 @@ public class LibraryBook {
     }
 
     public void borrow() {
-        isBorrowed = false;
+        isBorrowed = true;
     }
 
     public void turnBack(){
-        isBorrowed = true;
+        isBorrowed = false;
     }
 }

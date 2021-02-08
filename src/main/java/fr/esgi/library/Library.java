@@ -30,7 +30,7 @@ public class Library {
         libraryBooks.add(libraryBook);
     }
 
-    public void setLibraryBookToBorrowed(Book book) {
+    public void setSelectedBookToBorrowed(Book book) {
 
         List<LibraryBook> matchingBooks = libraryBooks.stream()
                 .filter(libraryBook -> libraryBook.getBook().equals(book) && libraryBook.isBorrowed() == false)
