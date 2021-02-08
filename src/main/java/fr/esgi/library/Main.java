@@ -18,7 +18,7 @@ public class Main {
         ILogger logger = new DefaultLogger();
 
 
-        Library library = new Library();
+        Library library = new Library(fileReader, fileWriter, logger);
         Librarian librarian = new Librarian();
         Book book = new Book("La croisée des mondes", "Carlos");
 //        Book book2 = new Book("1984", "Test");

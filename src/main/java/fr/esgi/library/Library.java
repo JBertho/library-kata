@@ -1,5 +1,6 @@
 package fr.esgi.library;
 
+import fr.esgi.library.logger.ILogger;
 import fr.esgi.library.model.Book;
 import fr.esgi.library.model.LibraryBook;
 import fr.esgi.library.reader.DefaultFileReader;
@@ -19,10 +20,10 @@ public class Library {
     private IFileWriter fileWriter;
     private IFileReader fileReader;
 
-    public Library() {
+    public Library(IFileReader reader, IFileWriter writer, ILogger logger) {
         this.libraryBooks = new ArrayList<>();
-        fileWriter = new DefaultFileWriter();
-        fileReader = new DefaultFileReader();
+        fileWriter = writer;
+        fileReader = reader;
         initLibraryBooks();
 
 
