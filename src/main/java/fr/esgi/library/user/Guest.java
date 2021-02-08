@@ -1,4 +1,4 @@
-package fr.esgi.library.User;
+package fr.esgi.library.user;
 
 import fr.esgi.library.Library;
 import fr.esgi.library.model.Book;

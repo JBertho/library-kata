@@ -13,7 +13,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Livre : " + title + " écrit par " + author + ".";
+        return "Livre : " + title + " écrit par " + author;
     }
 
     @Override
@@ -28,5 +28,9 @@ public class Book {
     @Override
     public int hashCode() {
         return Objects.hash(title, author);
+    }
+
+    public String toFileFormat() {
+        return title + "," + author;
     }
 }

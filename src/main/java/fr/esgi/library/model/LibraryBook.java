@@ -9,6 +9,12 @@ public class LibraryBook {
         this.isBorrowed = isBorrowed;
     }
 
+    public LibraryBook(String stringLibraryBook) {
+        String[] libraryBooksAttributes = stringLibraryBook.split(",");
+        this.book = new Book(libraryBooksAttributes[0],libraryBooksAttributes[1]);
+        this.isBorrowed = Boolean.parseBoolean(libraryBooksAttributes[2]);
+    }
+
     public Book getBook() {
         return book;
     }
@@ -23,5 +29,9 @@ public class LibraryBook {
 
     public void turnBack(){
         isBorrowed = false;
+    }
+
+    public String toFileFormat() {
+        return book.toFileFormat() + "," + isBorrowed;
     }
 }
