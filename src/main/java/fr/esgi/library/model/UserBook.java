@@ -21,6 +21,10 @@ public class UserBook {
         return book.toFileFormat() + "," + borrowedDate;
     }
 
+    public Book getBook() {
+        return book;
+    }
+
     @Override
     public String toString() {
         return book.toString() + " emprunté le " + borrowedDate;

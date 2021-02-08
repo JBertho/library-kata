@@ -17,21 +17,11 @@ public class Main {
         IFileReader fileReader = new DefaultFileReader();
         ILogger logger = new DefaultLogger();
 
+        LibraryScenario libraryScenario = new LibraryScenario();
 
-        Library library = new Library(fileReader, fileWriter, logger);
-
-        Librarian librarian = new Librarian(library);
-        Book book = new Book("La croisée des mondes", "Carlos");
-        librarian.addBookToLibrary(book);
-//        librarian.addBookToLibrary(library, book2);
-//        List<Book> books = librarian.getLibraryContent();
-//        System.out.println(books);
-
-        Member james = new Member("james",library,fileReader, fileWriter, logger);
-        james.borrowBook(book);
-        System.out.println(james.getBorrowedBooks());
-
-        System.out.println(james.getLibraryContent());
-
+        libraryScenario.createLibrarianAndAddBooks(fileWriter,fileReader,logger);
+        libraryScenario.watchLibraryContentAsGuest(fileWriter,fileReader,logger);
+        libraryScenario.borrowBookAsMember(fileWriter,fileReader, logger);
+        libraryScenario.returnBookAsMember(fileWriter,fileReader,logger);
     }
 }

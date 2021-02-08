@@ -17,6 +17,7 @@ public class Member extends Guest {
     private static final String PATH = "members/";
     private static final String EXTENSION = ".txt";
     private static final String NO_MORE_BORROW_POSSIBLE = "Vous ne pouvez pas emprunté de livre actuellement";
+    private static final String NO_EXISTING_BOOK_FIND = "Le livre n'a pas été trouvé";
 
     List<UserBook> userBooks;
     String userName;
@@ -58,6 +59,17 @@ public class Member extends Guest {
 
     public List<UserBook> getBorrowedBooks() {
         return userBooks;
+    }
+
+    public void returnBorrowedBook(UserBook userBook) {
+        int index = userBooks.indexOf(userBook);
+        if (index == -1) {
+            logger.log(NO_EXISTING_BOOK_FIND);
+            return;
+        }
+        userBooks.remove(index);
+        library.setSelectedBookToAvailable(userBook.getBook());
+        fileWriter.writeList(userBooks.stream().map(UserBook::toFileFormat).collect(Collectors.toList()),PATH + userName + EXTENSION);
     }
 
 }

@@ -7,13 +7,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DefaultFileReader implements IFileReader {
     @Override
     public List<String> readLines(String filename) {
         if (fileDoNotExist(filename)) {
-            return null;
+            return Collections.emptyList();
         }
 
         ArrayList<String> lines = new ArrayList<>();

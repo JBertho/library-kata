@@ -55,9 +55,7 @@ public class Library {
 
     public void setSelectedBookToBorrowed(Book book) {
 
-        List<LibraryBook> matchingBooks = libraryBooks.stream()
-                .filter(libraryBook -> libraryBook.getBook().equals(book) && libraryBook.isBorrowed() == false)
-                .collect(Collectors.toList());
+        List<LibraryBook> matchingBooks = getMatchingLibraryBookByState(book,false);
 
         if (matchingBooks.size() > 0) {
             LibraryBook bookToBorrow = matchingBooks.get(0);
@@ -65,5 +63,20 @@ public class Library {
             fileWriter.writeList(libraryBooks.stream().map(LibraryBook::toFileFormat).collect(Collectors.toList()),FILENAME);
         }
 
+    }
+
+    private List<LibraryBook> getMatchingLibraryBookByState(Book book,boolean isBorrowed) {
+        return libraryBooks.stream()
+                .filter(libraryBook -> libraryBook.getBook().equals(book) && libraryBook.isBorrowed() == isBorrowed)
+                .collect(Collectors.toList());
+    }
+
+    public void setSelectedBookToAvailable(Book book) {
+        List<LibraryBook> matchingBooks = getMatchingLibraryBookByState(book,true);
+        if (matchingBooks.size() > 0) {
+            LibraryBook bookToBorrow = matchingBooks.get(0);
+            bookToBorrow.turnBack();
+            fileWriter.writeList(libraryBooks.stream().map(LibraryBook::toFileFormat).collect(Collectors.toList()),FILENAME);
+        }
     }
 }

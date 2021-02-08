@@ -1,6 +1,7 @@
 import fr.esgi.library.Library;
 import fr.esgi.library.logger.DefaultLogger;
 import fr.esgi.library.model.Book;
+import fr.esgi.library.model.UserBook;
 import fr.esgi.library.reader.DefaultFileReader;
 import fr.esgi.library.reader.IFileReader;
 import fr.esgi.library.user.Guest;
@@ -68,6 +69,17 @@ public class MemberTest {
 
         member.borrowBook(new Book("my book", "author"));
         assertEquals(1,member.getBorrowedBooks().size());
+    }
+
+    @Test
+    public void should_remove_book_of_user_when_returning() {
+        member.borrowBook(new Book("my book", "author"));
+        List<UserBook> borrowedBooks = member.getBorrowedBooks();
+        assertEquals(1, borrowedBooks.size());
+
+        member.returnBorrowedBook(borrowedBooks.get(0));
+        borrowedBooks = member.getBorrowedBooks();
+        assertEquals(0, borrowedBooks.size());
     }
 
 
